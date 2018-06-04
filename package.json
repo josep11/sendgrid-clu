@@ -1,0 +1,15 @@
+{
+  "name": "cmd-sendgrid",
+  "version": "1.0.0",
+  "description": "receives params \u001bp[from, to, \u001b[D\u001b[D\u001b[D\u001b[Dsubject, to, content], sends an email and exits the process",
+  "main": "send_email.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sendgrid": "^3.0.11",
+    "yargs": "^5.0.0"
+  }
+}
