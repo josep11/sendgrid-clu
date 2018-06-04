@@ -1,4 +1,4 @@
-# SendGrid Feedback Emails Runnable By Command Line
+# SendGrid Command Line Utility
 ## Introduction
 Command line utility for sending emails with SendGrid.
 Really useful if you want to have a feedback system that can be run by the command line. Particularly with to check the sanity of certain cron jobs, testing digests or site uptests.
