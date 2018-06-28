@@ -1,7 +1,8 @@
 # SendGrid Command Line Utility
 ## Introduction
 Command line utility for sending emails with SendGrid.
-Really useful if you want to have a feedback system that can be run by the command line. Particularly with to check the sanity of certain cron jobs, testing digests or site uptests.
+Really useful if you want to have a feedback system that can be run by the command line.  
+Particularly with to check the sanity of certain cron jobs, testing digests or site uptests.
 ## Installation
 1. Install node.js (tested w/ 4.3.0)
 2. setx /m SENDGRID_API_KEY 'MY KEY'
