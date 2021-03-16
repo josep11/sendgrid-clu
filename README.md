@@ -13,8 +13,8 @@ Particularly with to check the sanity of certain cron jobs, testing digests or s
 3. run
 
         ```sh
-        # node end_email.js to subject content
-        node end_email.js dest@domain.com "Title" "Sup mate"
+        # node send_email.js to subject content
+        node send_email.js dest@domain.com "Hola" "Que tal?"
         ```
 
 4. [Optional] setx /m SENDGRID_DIR "this dir".

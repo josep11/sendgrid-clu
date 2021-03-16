@@ -1,50 +1,57 @@
-var argv = require('yargs').argv;
+const argv = require('yargs').argv;
 
-if (!process.env.SENDGRID_API_KEY){
+if (!process.env.SENDGRID_API_KEY) {
   console.log("Environment variable SENDGRID_API_KEY is not set. Aborting")
   process.exit(1)
 }
 
-var printHelp = function(){
+const printHelp = function () {
   process.stdout.write("\nUSAGE: \n");
   process.stdout.write('node send_email.js <dest_email> <title> <body> [-h]\n');
 };
 
-if (argv.h){
+if (argv.h) {
   printHelp();
   process.exit(0);
 }
 
-var args = process.argv.slice(2); //to subject content
-if (args.length < 2){
+const args = process.argv.slice(2); //to subject content
+if (args.length < 2) {
   printHelp();
   process.exit(1); //FAILURE
 }
 // var [to, subject, content] = args; //node >= 6
-var to = args[0], subject = args[1], content = args[2] || '';
+const to = args[0], subject = args[1], content = args[2] || '';
 
-//https://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/index.html#-Request-Body-Parameters
-  var helper = require('sendgrid').mail
-  //TODO: parametrize the sender
-  from_email = new helper.Email("josep_a11@sendgrid.net", "Josep SendGrid")
-  to_email = new helper.Email(to)
-  subject = subject
-  content = new helper.Content("text/html", content)
-  mail = new helper.Mail(from_email, subject, to_email, content)
+const helper = require('sendgrid').mail
 
-  var sg = require('sendgrid').SendGrid(process.env.SENDGRID_API_KEY)
-  var requestBody = mail.toJSON()
-  var request = sg.emptyRequest()
-  request.method = 'POST'
-  request.path = '/v3/mail/send'
-  request.body = requestBody
-  // console.log(request)
-  sg.API(request, function (response) {
-    // console.log(response.statusCode)
-    // console.log(response.body)
-    // console.log(response.headers)
-    if (response.statusCode != 202)
-      process.exit(1); //Error code
-    else
-      console.log('Email sent OK');
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+const msg = {
+  to: to,
+  //FIXME: You are not authorized to send from that email address, need to investigate how to make a valid sender
+  from: new helper.Email("josep12@sendgrid.net", "Josep SendGrid"),
+  subject: subject,
+  text: content,
+  // html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+}
+sgMail
+  .send(msg)
+  .then(() => {
+    console.log('Email sent')
+  })
+  .catch((error) => {
+    console.error(error)
+
+    if (error.response) {
+      // Extract error msg
+      const { message, code, response } = error;
+
+      // Extract response msg
+      const { headers, body } = response;
+
+      console.error(body);
+    }
+
+    process.exit(1)
   })
