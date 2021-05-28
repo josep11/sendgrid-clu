@@ -1,4 +1,9 @@
 # SendGrid Command Line Utility
+
+
+ATENTION: This project is deprecated with new Domain verification restrictions by SendGrid
+
+
 ## Introduction
 Command line utility for sending emails with SendGrid.
 Really useful if you want to have a feedback system that can be run by the command line.  
